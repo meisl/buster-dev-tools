@@ -19,7 +19,7 @@ if (!arg) {
     var moduleName = path.basename(cwd);
     var link = nodePath + moduleName;
     var whereLinkPointsTo = cwd;
-    if (symlinkExists(link)) {
+    if (path.existsSync(link)) {
         console.log("skipped npm-linking " + moduleName + ", already exists in " + nodePath);
     } else {
         var cmdSuffix = quote(link) + " " + quote(whereLinkPointsTo);

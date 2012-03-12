@@ -147,10 +147,9 @@ m.symlinkProjectDependencies.label = "Symlinking dependencies";
 m.npmLinkProject = function(project, cb) {
     process.chdir(project.localPath);
     var cmd = process.platform == "win32" ? "CALL ..\\buster-dev-tools\\npm-link-for-win" : "npm link";
-    console.log("??npm link in " + project.localPath + " using " + cmd);
     cp.exec(cmd, function (err, stdout, stderr) {
         if (err) rethrow(err, stdout, stderr, "error when trying to npm link in folder " + project.localPath);
-        util.print(".");
+        util.print(stdout ? '\n' + stdout + '\n' : '.');
         cb();
     });
 }
