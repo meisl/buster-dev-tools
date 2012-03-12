@@ -14,3 +14,4 @@ tasks.push(f.symlinkProjectDependencies);
 tasks.push(f.updateProjectSubmodules);
 
 f.withProjects(projects, tasks);
+debugger;

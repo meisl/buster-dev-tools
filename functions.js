@@ -104,23 +104,37 @@ m.symlinkProjectDependencies = function (project, cb) {
 
                 var cmd;
                 if (process.platform == "win32") {
-                    cmd = "rmdir /s /q"
+                    cmd = "rmdir /q" // DO NOT recursively delete, just remove the symlink (NTFS junction point on Win)
                 } else {
                     cmd = "rm -rf"
                 }
 
                 function performSymlink() {
-                    fs.symlinkSync(symlinkSource, symlinkTarget, "dir");
+                    if (process.platform == "win32") {
+                        console.log("src '" + symlinkSource + "' -> tgt '" + symlinkTarget + "'");
+                        // here: symlinkTarget = link to be created
+                        //       symlinkSource = where it points to
+                        cp.exec("junction " + quote(symlinkTarget) + " " + quote(symlinkSource), function (err, stdout, stderr) {
+                                if (err) {
+                                    console.error(stdout);
+                                    console.error(stderr);
+                                    throw err;
+                                }
+                            }
+                        );
+                    } else {
+                        fs.symlinkSync(symlinkSource, symlinkTarget, "dir");
+                    }
                     util.print(".");;
                     operator();
                 }
 
                 if (directoryExists(symlinkTarget)) {
+                    console.log("removing symlink " + quote(symlinkTarget));
                     cp.exec(cmd + " " + quote(symlinkTarget), function (error, stdout, stderr) {
                         if (error) {
                             throw new Error(error);
                         }
-
                         performSymlink();
                     });
                 } else {
@@ -139,10 +153,14 @@ m.symlinkProjectDependencies.label = "Symlinking dependencies";
 
 m.npmLinkProject = function(project, cb) {
     process.chdir(project.localPath);
-    var cmd = process.platform == "win32" ? "install" : "link";
-    cp.exec("npm " + cmd, function (err, stdout, stderr) {
+    console.log("??npm link in " + project.localPath);
+    debugger;
+    var cmd = process.platform == "win32" ? "..\\buster-dev-tools\\npm-link-for-win" : "npm link";
+    cp.exec(cmd, function (err, stdout, stderr) {
         if (err) {
-            console.log(project);
+            console.error("error when trying to npm link in folder " + project.localPath);
+            console.error(stdout);
+            console.error(stderr);
             throw err;
         }
         util.print(".");
