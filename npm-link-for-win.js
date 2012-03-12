@@ -44,6 +44,16 @@ if (!arg) {
             }
         });
     }
+    // FIXME: for now we just skip where npm install croaks:
+    if ((project.name != "buster-syntax") // jsdom (contextify)
+        && (project.name != "buster-test") // jsdom (contextify)
+        && (project.name != "buster-html-doc") // jsdom (contextify)
+        && (project.name != "buster-bayeux-emitter") // faye (redis)
+     ) {
+        cp.exec("npm install", function(err, stdout, stderr) {
+            if (err) rethrow(err, stdout, stderr);
+        });
+     }
 } else {
     throw new Error("Windows replacement for  npm link <package-name>  is not implemented");
 }
