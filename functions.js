@@ -52,7 +52,7 @@ m.cloneProject = function (project, cb) {
     }
 
     cp.exec("git clone " + quote(project.gitUrl) + " " + quote(project.localPath), function (err, stdout, stderr) {
-        if (err) throw err;
+        if (err) rethrow(err, stdout, stderr);
         util.print(".");
         cb();
     });
@@ -63,7 +63,7 @@ m.updateProject = function (project, cb) {
     if (directoryExists(project.localPath)) {
         process.chdir(project.localPath);
         cp.exec("git pull origin master", function (err, stdout, stderr) {
-            if (err) throw err;
+            if (err) rethrow(err,stdout,stderr);
             util.print(".");
             cb();
         });
@@ -111,17 +111,12 @@ m.symlinkProjectDependencies = function (project, cb) {
 
                 function performSymlink() {
                     if (process.platform == "win32") {
-                        console.log("src '" + symlinkSource + "' -> tgt '" + symlinkTarget + "'");
+                        //console.log("src '" + symlinkSource + "' -> tgt '" + symlinkTarget + "'");
                         // here: symlinkTarget = link to be created
                         //       symlinkSource = where it points to
                         cp.exec("junction " + quote(symlinkTarget) + " " + quote(symlinkSource), function (err, stdout, stderr) {
-                                if (err) {
-                                    console.error(stdout);
-                                    console.error(stderr);
-                                    throw err;
-                                }
-                            }
-                        );
+                            if (err) rethrow(err, stdout, stderr);
+                        });
                     } else {
                         fs.symlinkSync(symlinkSource, symlinkTarget, "dir");
                     }
@@ -130,11 +125,9 @@ m.symlinkProjectDependencies = function (project, cb) {
                 }
 
                 if (directoryExists(symlinkTarget)) {
-                    console.log("removing symlink " + quote(symlinkTarget));
-                    cp.exec(cmd + " " + quote(symlinkTarget), function (error, stdout, stderr) {
-                        if (error) {
-                            throw new Error(error);
-                        }
+                    //console.log("removing symlink " + quote(symlinkTarget));
+                    cp.exec(cmd + " " + quote(symlinkTarget), function (err, stdout, stderr) {
+                        if (err) rethrow(err, stdout, stderr);
                         performSymlink();
                     });
                 } else {
@@ -153,16 +146,10 @@ m.symlinkProjectDependencies.label = "Symlinking dependencies";
 
 m.npmLinkProject = function(project, cb) {
     process.chdir(project.localPath);
-    console.log("??npm link in " + project.localPath);
-    debugger;
-    var cmd = process.platform == "win32" ? "..\\buster-dev-tools\\npm-link-for-win" : "npm link";
+    var cmd = process.platform == "win32" ? "CALL ..\\buster-dev-tools\\npm-link-for-win" : "npm link";
+    console.log("??npm link in " + project.localPath + " using " + cmd);
     cp.exec(cmd, function (err, stdout, stderr) {
-        if (err) {
-            console.error("error when trying to npm link in folder " + project.localPath);
-            console.error(stdout);
-            console.error(stderr);
-            throw err;
-        }
+        if (err) rethrow(err, stdout, stderr, "error when trying to npm link in folder " + project.localPath);
         util.print(".");
         cb();
     });
@@ -172,7 +159,7 @@ m.npmLinkProject.label = "npm linking";
 m.updateProjectSubmodules = function(project, cb) {
     process.chdir(project.localPath);
     cp.exec("git submodule update --init", function (err, stdout, stderr) {
-        if (err) throw err;
+        if (err) rethrow(err, stdout, stderr);
         util.print(".");
         cb();
     });
@@ -215,6 +202,17 @@ function symlinkExists(path) {
     } else {
         throw new Error("Expected '" + path + "' to be a symlink.");
     }
+}
+
+// TODO: remove duplication (it's in functions.js, too)
+function rethrow(error, stdout, stderr, additionalMessage) {
+    if (additionalMessage) {
+        console.error(additionalMessage);
+    }
+    console.error(stdout); // let's push out all, maybe it'll give us a hint what went wrong
+    console.error(stderr);
+    console.error("error.code: " + error.code);
+    throw error;
 }
 
 function quote(path) {
