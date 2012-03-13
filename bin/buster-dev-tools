@@ -9,6 +9,7 @@ if (args.indexOf("-h") > -1 || args.indexOf("--help") > -1) {
     console.log("  install   Installs all the things.");
     console.log("   update   Updates all the things.");
     console.log("     deps   Reinstalls all non-buster deps.");
+    console.log(" depgraph   Produces a graph of dependencies (requires dot from http://www.graphviz.org/Download..php ).");
     return;
 }
 
@@ -24,6 +25,11 @@ if (args.indexOf("update") > -1) {
 
 if (args.indexOf("deps") > -1) {
     dt.doOperations(projects, [dt.installDeps]);
+    return;
+}
+
+if (args.indexOf("depgraph") > -1) {
+    dt.doOperations(projects, [dt.dependencyGraph]);
     return;
 }
 
