@@ -29,7 +29,7 @@ if (args.indexOf("deps") > -1) {
 }
 
 if (args.indexOf("depgraph") > -1) {
-    dt.doOperations(projects, [dt.dependencyGraph]);
+    dt.doOperations(projects, [dt.dependencyGraph.init, dt.dependencyGraph.build]);
     return;
 }
 
