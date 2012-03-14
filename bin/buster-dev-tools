@@ -41,6 +41,4 @@ if (args.indexOf("depgraph") > -1) {
     return;
 }
 
-process.stderr.write("Unrecognized option. See --help.");
-process.exit(1);
 error();
