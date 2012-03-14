@@ -6,7 +6,7 @@ var projects = [
     "buster-format",
     "buster-evented-logger",
     "buster-test-cli",
-    {name: "sinon", gitUrl: "git://github.com/cjohansen/Sinon.JS.git"},
+    {name: "sinon", gitUrl: "https://github.com/cjohansen/Sinon.JS.git"},
     "sinon-buster",
     "buster-static",
     "buster-util",
