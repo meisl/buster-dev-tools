@@ -1,4 +1,5 @@
 var projects = [
+    "buster-html-doc",
     {name: "sinon", gitUrl: "https://github.com/cjohansen/Sinon.JS.git"},
     "buster-util",
     "buster-user-agent-parser",
@@ -23,8 +24,8 @@ var projects = [
     "buster-test-cli",
     "buster-static",
     "buster",
-    "buster-jstestdriver",
-    "buster-html-doc"
+
+    "buster-jstestdriver"
 ];
 
 try { projects = require("./local").concat(projects) } catch(e){};
