@@ -23,7 +23,7 @@ no effect whatsoever, remove
 
 don't know
     buster-test-cli/.gitmodules
-            path = public/images <- https://github.com/busterjs/browser-logos.git
+            path = public/images <- https://github.com/busterjs/browser-logos.git   <<<<< the only one left; maybe just put 'em into buster-test-cli directly?
 
 
 internal -> external
