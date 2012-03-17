@@ -1,0 +1,69 @@
+
+internal -> internal
+--------------------
+npm can handle it, remove
+    buster-assertions/.gitmodules
+        vendor/buster-util <- git://gitorious.org/buster/buster-util.git
+        vendor/buster-core <- git://gitorious.org/buster/buster-core.git
+        vendor/sinon <- git://github.com/cjohansen/Sinon.JS.git
+    buster-core/.gitmodules
+        vendor/buster-util <- git://gitorious.org/buster/buster-util.git
+        vendor/sinon <- https://github.com/cjohansen/Sinon.JS.git
+
+no effect whatsoever, remove
+    buster-format/.gitmodules
+        vendor/buster-util <- git://gitorious.org/buster/buster-util.git
+        vendor/buster-assert <- git://gitorious.org/buster/buster-assert.git
+        vendor/buster-core <- git://gitorious.org/buster/buster-core.git
+        vendor/sinon <- git://github.com/cjohansen/Sinon.JS.git 
+    buster-jstestdriver/.gitmodules
+        node_modules/buster <- git://gitorious.org/buster/buster.git
+        node_modules/sinon <- git@github.com:cjohansen/Sinon.JS.git
+        node_modules/buster-script-loader <- git://gitorious.org/buster/buster-script-loader.git   exists only on gitorious, not on github
+
+don't know
+    buster-test-cli/.gitmodules
+            path = public/images <- https://github.com/busterjs/browser-logos.git
+
+
+internal -> external
+--------------------
+use tarball https://github.com/meisl/JSON-js/tarball/master
+    buster-capture-server/.gitmodules
+        vendor/json <- https://github.com/douglascrockford/JSON-js.git
+    buster-evented-logger/.gitmodules
+        vendor/json <- https://github.com/douglascrockford/JSON-js.git
+
+
+external -> external
+--------------------
+zero byte files anyways, leave as is
+    buster/node_modules/when/.gitmodules
+    buster-test-cli/node_modules/when/.gitmodules
+    buster-analyzer/node_modules/when/.gitmodules
+    buster-args/node_modules/when/.gitmodules
+    buster-capture-server/node_modules/when/.gitmodules
+    buster-client/node_modules/when/.gitmodules
+    buster-configuration/node_modules/when/.gitmodules
+    buster-resources/node_modules/when/.gitmodules
+    buster-test/node_modules/when/.gitmodules
+
+no effect whatsoever, leave as is
+    buster-test-cli/node_modules/ejs/support/expresso/.gitmodules
+        deps/jscoverage <- url = git://github.com/visionmedia/node-jscoverage.git 
+    buster-capture-server/node_modules/ejs/support/expresso/.gitmodules
+        deps/jscoverage <- url = git://github.com/visionmedia/node-jscoverage.git 
+    buster-html-doc/node_modules/jsdom/node_modules/cssom/.gitmodules
+        spec/vendor/objectDiff <- git://github.com/NV/objectDiff.js.git
+        spec/vendor/jasmine-html-reporter <- git://github.com/NV/jasmine-html-reporter.git
+
+npm seem to handle it, leave as is
+    buster-test-cli/node_modules/ejs/.gitmodules
+        support/expresso <- http://github.com/visionmedia/expresso.git
+    buster-capture-server/node_modules/ejs/.gitmodules
+        support/expresso <- http://github.com/visionmedia/expresso.git
+
+npm seems to handle it (both duplicated in node_modules), leave as is
+    buster-capture-server/node_modules/soupselect/.gitmodules
+        deps/nodeunit <- git://github.com/caolan/nodeunit.git
+        deps/htmlparser <- http://github.com/tautologistics/node-htmlparser.git 
