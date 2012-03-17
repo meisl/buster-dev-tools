@@ -1,12 +1,12 @@
 var projects = [
-    {name: "buster-evented-logger", gitUrl: "https://meisl@github.com/meisl/buster-evented-logger.git", branch: "abandon_git_submodules"},
-    {name: "buster-capture-server", gitUrl: "https://meisl@github.com/meisl/buster-capture-server.git", branch: "abandon_git_submodules"},
+    {name: "buster-evented-logger", gitUrl: "https://github.com/meisl/buster-evented-logger.git", branch: "abandon_git_submodules"},
+    {name: "buster-capture-server", gitUrl: "https://github.com/meisl/buster-capture-server.git", branch: "abandon_git_submodules"},
 
-    {name: "buster-core",           gitUrl: "https://meisl@github.com/meisl/buster-core.git",           branch: "abandon_git_submodules"},
-    {name: "buster-assertions",     gitUrl: "https://meisl@github.com/meisl/buster-assertions.git",     branch: "abandon_git_submodules"},
+    {name: "buster-core",           gitUrl: "https://github.com/meisl/buster-core.git",           branch: "abandon_git_submodules"},
+    {name: "buster-assertions",     gitUrl: "https://github.com/meisl/buster-assertions.git",     branch: "abandon_git_submodules"},
 
-    {name: "buster-format",         gitUrl: "https://meisl@github.com/meisl/buster-format.git",         branch: "abandon_git_submodules"},
-    {name: "buster-jstestdriver",   gitUrl: "https://meisl@github.com/meisl/buster-jstestdriver.git",   branch: "abandon_git_submodules"},
+    {name: "buster-format",         gitUrl: "https://github.com/meisl/buster-format.git",         branch: "abandon_git_submodules"},
+    {name: "buster-jstestdriver",   gitUrl: "https://github.com/meisl/buster-jstestdriver.git",   branch: "abandon_git_submodules"},
 
 	{name: "sinon", gitUrl: "https://github.com/cjohansen/Sinon.JS.git"},
     "buster-util",
