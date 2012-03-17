@@ -13,13 +13,13 @@ npm can handle it, remove
 no effect whatsoever, remove
     buster-format/.gitmodules
         vendor/buster-util <- git://gitorious.org/buster/buster-util.git
-        vendor/buster-assert <- git://gitorious.org/buster/buster-assert.git
+        vendor/buster-assert <- git://gitorious.org/buster/buster-assert.git   <<<< does not exist, probably buster-assertions
         vendor/buster-core <- git://gitorious.org/buster/buster-core.git
         vendor/sinon <- git://github.com/cjohansen/Sinon.JS.git 
     buster-jstestdriver/.gitmodules
         node_modules/buster <- git://gitorious.org/buster/buster.git
         node_modules/sinon <- git@github.com:cjohansen/Sinon.JS.git
-        node_modules/buster-script-loader <- git://gitorious.org/buster/buster-script-loader.git   exists only on gitorious, not on github
+        node_modules/buster-script-loader <- git://gitorious.org/buster/buster-script-loader.git   <<<<< exists only on gitorious, not on github
 
 don't know
     buster-test-cli/.gitmodules
