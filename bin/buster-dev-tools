@@ -14,19 +14,13 @@ var arg = args[0];
 if (arg == "-h" || args == "--help") {
     console.log("buster-dev-tools");
     console.log();
-    console.log("  install   Installs all the things.");
-    console.log("   update   Updates all the things.");
+    console.log("     pull   Clone and/or pull all the repos.");
     console.log("     deps   Reinstalls all non-buster deps.");
     console.log(" depgraph   Produces a graph of dependencies (requires dot from http://www.graphviz.org/Download..php ).");
     return;
 }
 
-if (arg == "install") {
-    dt.doOperations(projects, [dt.clone, dt.submodules, dt.installDeps]);
-    return;
-}
-
-if (arg == "update") {
+if (arg == "pull") {
     dt.doOperations(projects, [dt.pull, dt.submodules, dt.installDeps]);
     return;
 }
