@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+require("../buster-assertions/run-tests");
+require("../buster-format/run-tests");
+require("../buster-evented-logger/run-tests");
+
+require("../buster-capture-server/test/http-server-request-listener-proxy-test.js");
+
+require("../buster-capture-server/test/buster-capture-server-test.js");  // 1 test case, 38 tests, 78 assertions, 1 failure, 0 errors, 0 timeouts, 2 deferred - then HANGS!
+
+require("../buster-jstestdriver/run-tests"); // dramatically failing: 1 test case, 20 tests, 0 assertions, 16 failures, 4 errors, 0 timeouts \ WARNING: No assertions!
+
+// ATTENTION: contains hard-coded paths on Christian's machine:
+require("../buster-jstestdriver/run-sample"); // with buster-script-loader from gitorious: no error but no output either
+
+require("../buster-core/run-tests"); // throws Error in the end but that seems to be on purpose
