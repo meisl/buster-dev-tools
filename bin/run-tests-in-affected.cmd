@@ -1,5 +1,5 @@
 @IF EXIST "%~dp0"\"node.exe" (
-  "%~dp0"\"node.exe"  "%~dp0\buster-dev-tools" %*
+  "%~dp0"\"node.exe"  "%~dp0\run-tests-in-affected" %*
 ) ELSE (
-  node "%~dp0\buster-dev-tools" %*
+  node "%~dp0\run-tests-in-affected" %*
 )
